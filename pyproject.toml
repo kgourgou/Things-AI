@@ -1,0 +1,36 @@
+[project]
+name = "things-ai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "litellm>=1.59.10",
+    "python-dotenv>=1.0.1",
+    "loguru>=0.7.3",
+    "langgraph>=0.2.69",
+    "cloudpickle>=3.1.1",
+    "ipython>=8.32.0",
+    "things-py>=0.0.15",
+    "fire>=0.7.0",
+    "dspy-ai>=2.5.43",
+    "things-ai",
+    "cachetools>=5.5.1",
+    "asyncer>=0.0.8",
+    "json-repair>=0.35.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.9.4",
+    "black>=25.1.0",
+    "ipdb>=0.13.13",
+    "jupyterlab>=4.3.5",
+]
+
+[tool.uv.sources]
+things-ai = { workspace = true }
