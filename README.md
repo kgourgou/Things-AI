@@ -66,7 +66,9 @@ I use those locally with LMStudio and a 4bit quantization for about 5ish GB of R
 This experiment would not have been possible without:
 
 - The [Cultured Code](https://culturedcode.com/things/) team and their URL scheme.
-- The [things.py](https://github.com/thingsapi/things.py?tab=readme-ov-file) python library for reading the Things3 SQL database.  
+- The [things.py](https://github.com/thingsapi/things.py?tab=readme-ov-file) python library for reading the Things3 SQL database.
+
+I also appreciate the [DSPy](https://github.com/stanfordnlp/dspy/issues/1539) library and open-source model developers. 
   
 ## Risks
 
