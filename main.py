@@ -19,11 +19,15 @@ lm = dspy.LM(
 dspy.configure(lm=lm)
 th = ThingsAI()
 
-# This will fetch tasks from Things from the last 20 days and update them based on the command sign.
-# anything after the command sign will be considered a command for the LLM.
+# This will fetch tasks from Things from the last 20 days and update them based on the command character.
+# anything after the command character will be considered a command for the LLM.
 # for safety we never update the title of the task,
 # but you may add it here if you like.
 while True:
     logger.info("Scanning tasks...")
-    th(last="20d", command_sign=";", possible_edits=["due", "tags", "append_notes"])
+    th(
+        last="20d",
+        command_character=";",
+        possible_edits=["due", "tags", "append_notes"],
+    )
     time.sleep(TIME_TO_WAIT * 60)  # Convert minutes to seconds

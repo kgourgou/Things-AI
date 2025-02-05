@@ -39,8 +39,6 @@ class TaskDetector(dspy.Signature):
     due: "2023-01-01 at 2pm"
     append_notes: ""
 
-
-
     Please return the output fields
     """
 

@@ -13,9 +13,18 @@ Say you write a task in things like this:
 I need to do the thing # set tag to hard, due in three days
 ```
 
-If you then run main.py (and everything goes well), it should update the task in Things 3 to have the tag "hard" and a due date three days from now. It all depends on how up-to-date the SQL database that stores the todos is, and how well the parser works.
+If you then run main.py (and everything goes well), it should update the task in Things 3 to have the tag "hard" (if that tag already exists) and the due date three days from now.
 
-You can change the "#" to a different character in the main.py file.
+Essentially you write your tasks as
+
+```markdown
+<task title> <command character> <commands to the LLM for updating the task in Things>
+```
+
+and when Things cloud brings your tasks to your mac, the script will pick those with commands to the LLM
+and update them accordingly, then remove the command from the task. Those tasks will then be synced back to the cloud.
+
+You can change the "#" to a different command character in the main.py file.
 
 For now, the parser can only update the following fields:
 
@@ -24,7 +33,8 @@ For now, the parser can only update the following fields:
 - due date
 - append_notes
 
-Now I'm not a SWE and don't know a lot about how syncing works for Things, but I could imagine someone writing a todo on their phone while having this script running on their computer. It could be a fun way to automate some of the more tedious parts of task management.
+But in reality it should be simple to support any field that is updateable through the Things URL scheme,
+eg. the deadline, the project, the area, checklists, etc.
 
 ## Installation
 
@@ -42,18 +52,18 @@ API_KEY = <API_KEY>
 MODEL_NAME = <MODEL_NAME>
 ```
 
-You can learn more about the auth token and the Things URL scheme [here](https://culturedcode.com/things/support/articles/2803573). 
+You can learn more about the auth token and the Things URL scheme [here](https://culturedcode.com/things/support/articles/2803573).
 
-I'm using litellm here, so you can connect to any litellm-supported LLM. I'm using "mradermacher/Bespoke-Stratos-7B-i1-GGUF" from [Bespoke Labs](https://www.bespokelabs.ai/) which I'm running on my laptop with LM-Studio.
+I'm using litellm, so you can connect to any litellm-supported LLM. I'm using "mradermacher/Bespoke-Stratos-7B-i1-GGUF" from [Bespoke Labs](https://www.bespokelabs.ai/) which I'm running on my laptop with LM-Studio.
 
 ## Acknowledgements
 
 This experiment would not have been possible without:
 
 - The [Cultured Code](https://culturedcode.com/things/) team and their URL scheme.
-- The [things.py](https://github.com/thingsapi/things.py?tab=readme-ov-file) python library for reading the SQL database.  
-- The [json-repair](https://github.com/mangiucugna/json_repair) python library for fixing the output of the LLM.
+- The [things.py](https://github.com/thingsapi/things.py?tab=readme-ov-file) python library for reading the Things3 SQL database.  
   
 ## Risks
 
 - The LLM may overwrite your tasks in ways you don't like. That's why by default I set the possible_edits to be ["tags", "due date", "append_notes"]. You can change this in the main.py file.
+- I don't know what triggers cloud sync in Things 3, so you may have to wait a bit for the changes to be reflected in the app.

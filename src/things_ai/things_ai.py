@@ -21,16 +21,16 @@ class ThingsAI(dspy.Module):
         self,
         last: str = "1d",
         possible_edits: list[str] | None = None,
-        command_sign: str = "#",
+        command_character: str = "#",
     ):
         """
 
-        Fetch tasks from Things and update them based on the command sign.
+        Fetch tasks from Things and update them based on the command character.
 
         Args:
             last (str): The time period to fetch tasks from.
             possible_edits (list[str]): The possible edits to make to the tasks.
-            command_sign (str): The sign to look for in the task title.
+            command_character (str): The sign to look for in the task title.
         """
 
         possible_edits = possible_edits or ["due", "tags", "append_notes"]
@@ -44,12 +44,12 @@ class ThingsAI(dspy.Module):
         for task in todos:
             text = task["title"]
 
-            if command_sign not in text:
+            if command_character not in text:
                 continue
 
             logger.info(f"Found task to update: {text}")
             response = self.task_detector(
-                text=text, command_sign=command_sign, today=today_date
+                text=text, command_sign=command_character, today=today_date
             ).toDict()
 
             # Filter out anything we don't want to update
@@ -60,7 +60,7 @@ class ThingsAI(dspy.Module):
             logger.debug(f"Updating task with: {update_dict}")
 
             if "title" not in update_dict:
-                update_dict["title"] = text.split(command_sign)[0].strip()
+                update_dict["title"] = text.split(command_character)[0].strip()
 
             if update_dict:
                 self.writer.update_entry(uuid=task["uuid"], **update_dict)
