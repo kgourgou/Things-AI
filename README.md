@@ -54,7 +54,12 @@ MODEL_NAME = <MODEL_NAME>
 
 You can learn more about the auth token and the Things URL scheme [here](https://culturedcode.com/things/support/articles/2803573).
 
-I'm using litellm, so you can connect to any litellm-supported LLM. I'm using "mradermacher/Bespoke-Stratos-7B-i1-GGUF" from [Bespoke Labs](https://www.bespokelabs.ai/) which I'm running on my laptop with LM-Studio.
+I'm using litellm, so you can connect to any litellm-supported LLM. If you want to use a local model, I recommend either
+
+- "mradermacher/Bespoke-Stratos-7B-i1-GGUF" from [Bespoke Labs](https://www.bespokelabs.ai/)
+- or <https://huggingface.co/mlabonne/NeuralBeagle14-7B> from Maxime.
+
+I use those locally with LMStudio and a 4bit quantization for about 5ish GB of RAM usage.
 
 ## Acknowledgements
 
