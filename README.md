@@ -21,7 +21,7 @@ Essentially you write your tasks as
 <task title> <command character> <commands to the LLM for updating the task in Things>
 ```
 
-and when Things cloud brings your tasks to your mac, the script will pick those with commands to the LLM
+and when Things cloud brings your tasks to your mac, the script will pick those with commands, send them to the LLM
 and update them accordingly, then remove the command from the task. Those tasks will then be synced back to the cloud.
 
 You can change the "#" to a different command character in the main.py file.
